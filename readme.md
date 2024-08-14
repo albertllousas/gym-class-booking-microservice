@@ -18,4 +18,4 @@ Keywords: `Hexagonal-Architecture`, `microservice`, `kotlin`, `Helidon-SE`, `Deb
 
 It is used only in the test env, for a prod usage it should be configured:
 
-[Debezium test container](/src/test/kotlin/bed/fixtures/containers/Debezium.kt)
+[Debezium test container](/src/test/kotlin/gymclass/fixtures/containers/Debezium.kt)
