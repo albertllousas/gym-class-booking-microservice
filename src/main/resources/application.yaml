@@ -1,0 +1,41 @@
+server:
+  port: 8080
+
+database:
+  password: ${DB_PASSWORD}
+  username: ${DB_USER}
+  jdbc-url: ${DB_URL}
+  driver-class-name: "org.postgresql.Driver"
+  hikari-pool:
+    max-pool-size: 10
+    min-idle: 5
+    idle-timeout: 10000
+    max-lifetime: 600000
+    connection-timeout: 30000
+    pool-name: "MyHikariPool"
+    auto-commit: false
+
+client:
+  members-api:
+    base-url: https://members.service.consul
+    connect-timeout: PT3S
+    read-timeout: PT10S
+
+mp.messaging:
+
+  incoming.from-kafka:
+    connector: helidon-kafka
+    topic: gymclass.events
+    dlq-topic: gymclass.events.dlq
+    auto.offset.reset: earliest
+    enable.auto.commit: true
+    group.id: gymclass-service-id
+  outgoing.to-kafka:
+    topic: gymclass.events
+  connector:
+    helidon-kafka:
+      bootstrap.servers: localhost:9092
+      key.serializer: org.apache.kafka.common.serialization.StringSerializer
+      value.serializer: org.apache.kafka.common.serialization.ByteArraySerializer
+      key.deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value.deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
