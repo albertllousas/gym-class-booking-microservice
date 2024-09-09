@@ -8,7 +8,7 @@ import gymclass.app.domain.OutboundPorts
 import gymclass.app.domain.UseCaseErrors.BookForWaitingMemberError
 import java.util.UUID
 
-class BookForForWaitingMemberUseCase(
+class BookForWaitingMemberUseCase(
     private val gymClassRepository: OutboundPorts.GymClassRepository,
     private val eventPublisher: OutboundPorts.EventPublisher,
     private val execute: ExecuteUsecase

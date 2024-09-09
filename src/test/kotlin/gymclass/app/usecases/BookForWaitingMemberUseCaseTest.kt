@@ -17,12 +17,12 @@ import io.mockk.verify
 import org.junit.jupiter.api.Test
 import java.util.UUID
 
-class BookForForWaitingMemberUseCaseTest {
+class BookForWaitingMemberUseCaseTest {
 
     private val gymClassRepository = mockk<OutboundPorts.GymClassRepository>(relaxed = true)
     private val eventPublisher = mockk<OutboundPorts.EventPublisher>(relaxed = true)
 
-    private val bookForForWaitingMember = BookForForWaitingMemberUseCase(
+    private val bookForForWaitingMember = BookForWaitingMemberUseCase(
         gymClassRepository,
         eventPublisher,
         FakeExecuteUsecase,

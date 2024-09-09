@@ -2,7 +2,7 @@ package gymclass.infra.config
 
 import gymclass.app.domain.OutboundPorts
 import gymclass.app.usecases.BookClassUseCase
-import gymclass.app.usecases.BookForForWaitingMemberUseCase
+import gymclass.app.usecases.BookForWaitingMemberUseCase
 import gymclass.app.usecases.CancelBookingUseCase
 import gymclass.app.usecases.ExecuteUsecase
 import gymclass.app.usecases.SubscribeToWaitingListUseCase
@@ -49,7 +49,7 @@ object UseCasesConfig {
         gymClassRepository: OutboundPorts.GymClassRepository,
         eventPublisher: OutboundPorts.EventPublisher,
         executeUsecase: ExecuteUsecase
-    ): BookForForWaitingMemberUseCase = BookForForWaitingMemberUseCase(
+    ): BookForWaitingMemberUseCase = BookForWaitingMemberUseCase(
         gymClassRepository,
         eventPublisher,
         executeUsecase,
