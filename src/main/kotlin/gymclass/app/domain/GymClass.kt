@@ -28,7 +28,7 @@ data class GymClass(
         val GENERATE_BOOKING_ID = { BookingId(UUID.randomUUID()) }
     }
 
-    fun book(member: Member): Either<BookClassFailure, ClassBooked> {
+    fun bookFor(member: Member): Either<BookClassFailure, ClassBooked> {
         val booking = Booking(generateBookingId(), member.id)
         val result = when {
             startTime.isBefore(now(clock)) || startTime.isEqual(now(clock)) -> TooLateToBook.left()
@@ -65,12 +65,12 @@ data class GymClass(
         }
     }
 
-    fun bookForWaitingMember(): Either<BookForWaitingMemberFailure, ClassBooked> {
+    fun tryTobookForMemberInWaitingList(): Either<BookForWaitingMemberFailure, ClassBooked> {
         val memberId = waitingList.firstOrNull()
         val result = when {
             memberId == null -> WaitingListEmpty.left()
             maxCapacity > bookings.size.inc() -> MaxCapacityReached.left()
-            else -> this.book(member = Member(memberId))
+            else -> this.bookFor(member = Member(memberId))
                 .mapLeft { it as BookForWaitingMemberFailure }
                 .map { it.copy(
                     promotedFromWaitingList = true,

@@ -20,7 +20,7 @@ class BookClassUseCase(
     override fun invoke(classId: UUID, memberId: UUID): Either<BookClassError, BookingId> = execute {
         gymClassRepository.findBy(ClassId(classId))
             .flatMap { memberFinder.findBy(MemberId(memberId)).map { member -> Pair(it, member) } }
-            .flatMap { (gymClass, member) -> gymClass.book(member) }
+            .flatMap { (gymClass, member) -> gymClass.bookFor(member) }
             .onRight { gymClassRepository.save(it.gymClass) }
             .onRight { eventPublisher.publish(it) }
             .map { it.booking.id }

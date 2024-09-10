@@ -35,7 +35,7 @@ class GymClassTest {
             )
             val member = buildMember()
 
-            val result = gymClass.book(member)
+            val result = gymClass.bookFor(member)
 
             result shouldBe ClassBooked(
                 on = LocalDateTime.parse("2020-01-02T00:00:00"),
@@ -55,7 +55,7 @@ class GymClassTest {
                 generateBookingId = generateBookingId
             )
 
-            val result = gymClass.book(member)
+            val result = gymClass.bookFor(member)
 
             result shouldBe BookingAlreadyExists.left()
         }
@@ -71,7 +71,7 @@ class GymClassTest {
                 generateBookingId = generateBookingId
             )
 
-            val result = gymClass.book(member)
+            val result = gymClass.bookFor(member)
 
             result shouldBe MaxCapacityReached.left()
         }
@@ -85,7 +85,7 @@ class GymClassTest {
                 clock = clock
             )
 
-            val result = gymClass.book(member)
+            val result = gymClass.bookFor(member)
 
             result shouldBe TooLateToBook.left()
         }
@@ -100,7 +100,7 @@ class GymClassTest {
                 maxCapacity = 10,
             )
 
-            val result = gymClass.book(member)
+            val result = gymClass.bookFor(member)
 
             result shouldBe TooLateToBook.left()
         }
@@ -219,7 +219,7 @@ class GymClassTest {
     }
 
     @Nested
-    inner class BookForWaitingMember {
+    inner class TryToBookForMemberInWaitingList {
 
         @Test
         fun `should book for waiting member`() {
@@ -231,7 +231,7 @@ class GymClassTest {
                 generateBookingId = generateBookingId
             )
 
-            val result = gymClass.bookForWaitingMember()
+            val result = gymClass.tryTobookForMemberInWaitingList()
 
             result shouldBe ClassBooked(
                 on = LocalDateTime.parse("2020-01-02T00:00:00"),
@@ -252,7 +252,7 @@ class GymClassTest {
                 waitingList = emptyList()
             )
 
-            val result = gymClass.bookForWaitingMember()
+            val result = gymClass.tryTobookForMemberInWaitingList()
 
             result shouldBe WaitingListEmpty.left()
         }
@@ -266,7 +266,7 @@ class GymClassTest {
                 waitingList = listOf(memberId)
             )
 
-            val result = gymClass.bookForWaitingMember()
+            val result = gymClass.tryTobookForMemberInWaitingList()
 
             result shouldBe MaxCapacityReached.left()
         }

@@ -21,7 +21,7 @@ object InboundPorts {
         operator fun invoke(classId: UUID, memberId: UUID): Either<CancelBookingError, Unit>
     }
 
-    interface BookForWaitingMember {
+    interface TryToBookForMemberInWaitingList {
         operator fun invoke(classId: UUID): Either<BookForWaitingMemberError, Unit>
     }
 }

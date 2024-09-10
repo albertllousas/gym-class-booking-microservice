@@ -33,7 +33,7 @@ class GymClassEventsKafkaConsumerTest {
         it.sources(customConfigSource, defaultConfigSource).build()
     }.build()
 
-    private val bookWaitingMember = mockk<InboundPorts.BookForWaitingMember>(relaxed = true)
+    private val bookWaitingMember = mockk<InboundPorts.TryToBookForMemberInWaitingList>(relaxed = true)
 
     private val producer = kafka.buildProducer()
 
